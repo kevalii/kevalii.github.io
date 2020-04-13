@@ -26,17 +26,9 @@ main {
 	margin: auto;
 }
 
-#reset-button-comp {
-  color: red;
-}
-
 #start-button {
 	margin-left: auto;
 	margin-right: auto;
-}
-
-#start-button-comp {
-  color: red;
 }
 
 #title {
@@ -66,7 +58,7 @@ main {
 	margin-top: 7px;
 }
 
-.latex-button {
+.latex-button, .latex-style {
 	font-family: Katex_Main, serif;
 	font-size: 1em;
 	background-color: white;

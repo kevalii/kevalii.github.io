@@ -73,6 +73,7 @@ function showIntro() {
     $("#ending-window").hide();
     $("#intro-window").show();
 
+
     let introText =  "This is a game to test your \\(\\LaTeX\\) skills. <br/> <br/>" +
                      " Type as many formulas as you can in " + TIMEOUT_STRING + " (timed game), or play an untimed game (zen mode)!";
     $("#intro-text").html(introText);
@@ -92,6 +93,8 @@ function endGame() {
     $("#intro-window").hide();
     $("#game-window").hide();
     $("#ending-window").show();
+    $("#reset-comp-seed").val($("#comp-seed").val())
+
     displayLaTeXInBody();
 
     let problemsText = numCorrect + ((numCorrect == 1) ? " problem" : " problems");
@@ -131,14 +134,20 @@ function endGame() {
 }
 
 
-function startGame(useTimer, compMode = false) {
+function startGame(useTimer) {
     problemNumber = 0;
     currentScore = 0;
     numCorrect = 0;
     oldVal = "";
     problemsOrder = [...Array(problems.length).keys()];
-    if (!compMode)
-      shuffleArray(problemsOrder);
+
+    reset_seed = $('#reset-comp-seed').val()
+    seed = $("#comp-seed").val(reset_seed != '' ? reset_seed : $("#comp-seed").val()).val()
+
+    if (seed != '')
+        Math.seedrandom(seed)
+
+    shuffleArray(problemsOrder);
     skippedProblems = [];
 
     $("#intro-window").hide();
@@ -284,20 +293,12 @@ $(document).ready(function() {
         startGame(false);
     });
 
-    $("#start-button-comp").click(function() {
-      startGame(false, true);
-    });
-
     $("#reset-button-timed").click(function() {
         startGame(true);
     });
 
     $("#reset-button-untimed").click(function() {
         startGame(false);
-    });
-
-    $("#reset-button-comp").click(function() {
-      startGame(false, true);
     });
 
     $("#skip-button").click(function() {
