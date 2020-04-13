@@ -131,13 +131,14 @@ function endGame() {
 }
 
 
-function startGame(useTimer) {
+function startGame(useTimer, compMode = false) {
     problemNumber = 0;
     currentScore = 0;
     numCorrect = 0;
     oldVal = "";
     problemsOrder = [...Array(problems.length).keys()];
-    shuffleArray(problemsOrder);
+    if (!compMode)
+      shuffleArray(problemsOrder);
     skippedProblems = [];
 
     $("#intro-window").hide();
@@ -283,12 +284,20 @@ $(document).ready(function() {
         startGame(false);
     });
 
+    $("#start-button-comp").click(function() {
+      startGame(false, true);
+    });
+
     $("#reset-button-timed").click(function() {
         startGame(true);
     });
 
     $("#reset-button-untimed").click(function() {
         startGame(false);
+    });
+
+    $("#reset-button-comp").click(function() {
+      startGame(false, true);
     });
 
     $("#skip-button").click(function() {

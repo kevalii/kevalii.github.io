@@ -26,9 +26,17 @@ main {
 	margin: auto;
 }
 
+#reset-button-comp {
+  color: red;
+}
+
 #start-button {
 	margin-left: auto;
 	margin-right: auto;
+}
+
+#start-button-comp {
+  color: red;
 }
 
 #title {
